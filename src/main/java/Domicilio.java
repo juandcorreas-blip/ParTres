@@ -43,4 +43,10 @@ public class Domicilio {
     public void setAceptado(boolean aceptado) {
         this.aceptado = aceptado;
     }
+
+    @Override
+    public String toString() {
+        return "Empresa: " + empresa.getNombre() + " | Distancia: " + distanciaKm + " km | Costo: $" + costo
+                + " | Aceptado: " + (aceptado ? "Sí" : "No");
+    }
 }

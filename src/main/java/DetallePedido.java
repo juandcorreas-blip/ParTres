@@ -7,6 +7,13 @@ public class DetallePedido {
         this.producto = producto;
         this.cantidad = cantidad;
     }
+    public boolean cantidadValida() {
+        return cantidad > 0;
+    }
+
+    public double calcularSubtotal() {
+        return producto.calcularPrecioVenta() * cantidad;
+    }
 
     public Producto getProducto() {
         return producto;
@@ -23,4 +30,10 @@ public class DetallePedido {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    @Override
+    public String toString() {
+        return producto.getNombre() + " x" + cantidad + " = $" + calcularSubtotal();
+    }
 }
+
+
