@@ -68,6 +68,11 @@ public class Bebida extends Producto {
     }
 
     @Override
+    public CategoriaProducto getCategoria() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "[Bebida] " + super.toString() + " | Volumen: " + volumenMl + " ml | Temperatura: " + temperatura
                 + " °C | Tipo: " + tipoBebida + " | Preparación especial: " + (requierePreparacionEspecial ? "Sí" : "No");
