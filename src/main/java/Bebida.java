@@ -45,4 +45,31 @@ public class Bebida extends Producto {
     public void setRequierePreparacionEspecial(boolean requierePreparacionEspecial) {
         this.requierePreparacionEspecial = requierePreparacionEspecial;
     }
+
+    @Override
+    public double calcularPrecioVenta() {
+        double precio = getPrecioBase() * 110 / 100;
+        if (requierePreparacionEspecial) {
+            precio = precio + 3000;
+        }
+        return precio;
+    }
+
+    @Override
+    public boolean cumpleCondicionesCalidad() {
+        if (volumenMl < 150 || volumenMl > 1500) {
+            return false;
+        }
+        if (tipoBebida == TipoBebida.FRIA) {
+            return temperatura >= 0 && temperatura <= 10;
+        } else {
+            return temperatura >= 55 && temperatura <= 85;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "[Bebida] " + super.toString() + " | Volumen: " + volumenMl + " ml | Temperatura: " + temperatura
+                + " °C | Tipo: " + tipoBebida + " | Preparación especial: " + (requierePreparacionEspecial ? "Sí" : "No");
+    }
 }

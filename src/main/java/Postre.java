@@ -29,10 +29,37 @@ public class Postre extends Producto {
     }
 
     public boolean isRequiereRefrigeracion() {
+
         return requiereRefrigeracion;
     }
 
     public void setRequiereRefrigeracion(boolean requiereRefrigeracion) {
         this.requiereRefrigeracion = requiereRefrigeracion;
+    }
+
+    @Override
+    public double calcularPrecioVenta() {
+        double precio = getPrecioBase() * 115 / 100;
+        if (requiereRefrigeracion) {
+            precio = precio + getPrecioBase() * 5 / 100;
+        }
+        return precio;
+    }
+
+    @Override
+    public boolean cumpleCondicionesCalidad() {
+        if (pesoGramos < 80 || pesoGramos > 500) {
+            return false;
+        }
+        if (requiereRefrigeracion) {
+            return temperaturaAlmacenamiento >= 0 && temperaturaAlmacenamiento <= 6;
+        } else {
+            return temperaturaAlmacenamiento >= 15 && temperaturaAlmacenamiento <= 30;
+        }
+    }
+    @Override
+    public String toString() {
+        return "[Postre] " + super.toString() + " | Peso: " + pesoGramos + " g | Temperatura: "
+                + temperaturaAlmacenamiento + " °C | Refrigeración: " + (requiereRefrigeracion ? "Sí" : "No");
     }
 }
