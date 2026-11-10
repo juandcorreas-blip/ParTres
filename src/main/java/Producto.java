@@ -53,4 +53,18 @@ public abstract class Producto {
     public void setTiempoPreparacion(int tiempoPreparacion) {
         this.tiempoPreparacion = tiempoPreparacion;
     }
+
+
+    public abstract double calcularPrecioVenta();
+
+
+    public abstract boolean cumpleCondicionesCalidad();
+
+    public abstract CategoriaProducto getCategoria();
+    @Override
+    public String toString() {
+        return "Código: " + codigo + " | Nombre: " + nombre + " | Descripción: " + descripcion
+                + " | Precio base: $" + precioBase + " | Preparación: " + tiempoPreparacion + " min";
+    }
+
 }
