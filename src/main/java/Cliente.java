@@ -17,6 +17,22 @@ public class Cliente {
         this.direccion = direccion;
         this.historialPedidos = new ArrayList<>();
     }
+    public boolean agregarPedido(Pedido pedido) {
+        if (buscarPedido(pedido.getCodigo()) != null) {
+            return false;
+        }
+        historialPedidos.add(pedido);
+        return true;
+    }
+
+    public Pedido buscarPedido(String codigo) {
+        for (Pedido pedido : historialPedidos) {
+            if (pedido.getCodigo().equals(codigo)) {
+                return pedido;
+            }
+        }
+        return null;
+    }
 
     public String getDocumento() {
         return documento;
@@ -64,5 +80,10 @@ public class Cliente {
 
     public void setHistorialPedidos(ArrayList<Pedido> historialPedidos) {
         this.historialPedidos = historialPedidos;
+    }
+    @Override
+    public String toString() {
+        return "Documento: " + documento + " | Nombre: " + nombreCompleto + " | Teléfono: " + telefono
+                + " | Correo: " + correo + " | Dirección: " + direccion;
     }
 }

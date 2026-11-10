@@ -20,6 +20,30 @@ public class Pedido {
         this.detalles = new ArrayList<>();
         this.domicilio = null;
     }
+    public void agregarDetalle(Producto producto, int cantidad) {
+        detalles.add(new DetallePedido(producto, cantidad));
+    }
+
+    // Valor de los productos, sin domicilio
+    public double calcularValorProductos() {
+        double total = 0;
+        for (DetallePedido detalle : detalles) {
+            total = total + detalle.calcularSubtotal();
+        }
+        return total;
+    }
+
+    // Solo cuenta si el pedido es a domicilio y el servicio fue aceptado
+    public double calcularCostoDomicilio() {
+        if (modalidad == ModalidadEntrega.DOMICILIO && domicilio != null && domicilio.isAceptado()) {
+            return domicilio.getCosto();
+        }
+        return 0;
+    }
+
+    public double calcularValorTotal() {
+        return calcularValorProductos() + calcularCostoDomicilio();
+    }
 
     public String getCodigo() {
         return codigo;
@@ -75,5 +99,18 @@ public class Pedido {
 
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
+    }
+    @Override
+    public String toString() {
+        String texto = "Pedido " + codigo + " | Fecha: " + fecha + " | Cliente: " + cliente.getNombreCompleto()
+                + " | Modalidad: " + modalidad + " | Estado: " + estado;
+        for (DetallePedido detalle : detalles) {
+            texto = texto + "\n   - " + detalle;
+        }
+        if (domicilio != null) {
+            texto = texto + "\n   Domicilio: " + domicilio;
+        }
+        texto = texto + "\n   Valor total: $" + calcularValorTotal();
+        return texto;
     }
 }
