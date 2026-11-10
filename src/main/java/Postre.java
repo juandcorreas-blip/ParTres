@@ -57,6 +57,12 @@ public class Postre extends Producto {
             return temperaturaAlmacenamiento >= 15 && temperaturaAlmacenamiento <= 30;
         }
     }
+
+    @Override
+    public CategoriaProducto getCategoria() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return "[Postre] " + super.toString() + " | Peso: " + pesoGramos + " g | Temperatura: "
